@@ -6,3 +6,5 @@ mlflow
 psycopg2-binary
 argparse
 jupyterlab
+pandas
+numpy
