@@ -22,5 +22,14 @@ estimators:
 
 model_dirs: models/models.sav
 
+reports:
+  params: reports/params.json
+  score: reports/scores.json
 
+mlflow_config:
+  artificats_dir: artifacts
+  experiments_name: Elastic_Net
+  run_name: mlops
+  registered_model: ElasticNetMedicalExpenses
+  remote_server_uri: 127.0.0.1:5000
 
