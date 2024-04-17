@@ -17,10 +17,10 @@ split_data:
 estimators:
   ElasticNet:
     params:
-      alpha: 0.7
-      l1_ratio: 0.8
+      alpha: 0.9
+      l1_ratio: 0.9
 
-model_dirs: models/models.sav
+model_dirs: models/models.joblib
 
 reports:
   params: reports/params.json
