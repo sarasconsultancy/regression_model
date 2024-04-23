@@ -46,6 +46,7 @@ def train_and_evaluate_mlops(config_path):
 
     mlflow_config = config["mlflow_config"]
     remote_server_uri = mlflow_config["remote_server_uri"]
+    #remote_server_uri = "https://dagshub.com/TanzeemAgra/regression_model.mlflow"
     mlflow.set_tracking_uri(remote_server_uri)
 
     ######################### MLFLOW SERVER ########

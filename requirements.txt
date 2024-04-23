@@ -1,12 +1,9 @@
 pandas
 numpy
-scikit-learn
+scikit-learn==1.3.2
 dvc
-mlflow
+mlflow==2.9.2
 psycopg2-binary
 argparse
 jupyterlab
-pandas
-numpy
 joblib
-mlflow

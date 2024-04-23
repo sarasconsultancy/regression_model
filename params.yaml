@@ -28,7 +28,7 @@ model_dirs: models/models.joblib
 
 mlflow_config:
   artificats_dir: artifacts
-  experiment_name: ElasticNet_Expenses_stage1
+  experiment_name: ElasticNet
   run_name: mlops
   registered_model_name: ElasticNetMedicalExpenses
   remote_server_uri: http://127.0.0.1:5000
