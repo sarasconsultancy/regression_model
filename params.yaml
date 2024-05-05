@@ -17,8 +17,8 @@ split_data:
 estimators:
   ElasticNet:
     params:
-      alpha: 0.8
-      l1_ratio: 0.8
+      alpha: 0.9
+      l1_ratio: 0.9
 
 model_dirs: models/models.joblib
 
@@ -30,6 +30,5 @@ mlflow_config:
   artificats_dir: artifacts
   experiment_name: ElasticNet
   run_name: mlops
-  registered_model_name: ElasticNetMedicalExpenses
+  registered_model_name: ElasticNet
   remote_server_uri: http://127.0.0.1:5000
-
