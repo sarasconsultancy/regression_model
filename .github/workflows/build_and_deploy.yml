@@ -20,4 +20,4 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name : Trivy File Scan
-          run : trivy fs . > trivyfile.txt
+        run : trivy fs . > trivyfile.txt
