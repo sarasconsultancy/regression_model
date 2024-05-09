@@ -21,3 +21,13 @@ jobs:
 
       - name : Trivy File Scan
         run : trivy fs . > trivyfile.txt
+      - name: Docker Compose Build and Push
+        run: |
+          docker-compose build -t training .
+          docker-compose tag training TanzeemAgra/training:latest
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+          docker push TanzeemAgra/training:latest
+        env:
+          DOCKER_CLI_ACI: 1
+          
+          
