@@ -21,17 +21,6 @@ jobs:
 
       - name : Trivy File Scan
         run : trivy fs . > trivyfile.txt
-
-      - name: Send a Slack Notification
-        if: always()
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-          channel: '#githubaction-eks'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        
         
       - name: Docker COmpose Build and Push
         run: |
@@ -43,6 +32,17 @@ jobs:
       - name: Stop Container
         if: always()
         run: docker-compose -f "docker-compose.yaml" down
+
+      - name: Send a Slack Notification
+        if: always()
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          channel: "#githubaction-eks"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
           
           
               
