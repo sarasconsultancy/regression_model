@@ -24,6 +24,7 @@ jobs:
               
       - name: Docker Compose Build and Push
         run: |
+          docker build -t training .
           docker-compose -f docker-compose.yaml build
           docker-compose -f docker-compose.yaml up -d
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
