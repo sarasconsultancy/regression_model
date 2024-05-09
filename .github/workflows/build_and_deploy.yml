@@ -32,7 +32,7 @@ jobs:
         run: |
           docker-compose -f docker-compose.yaml build
           docker-compose -f docker-compose.yaml up -d
-          docker push TanzeemAgra/training:latest
+          docker push xerxez786/training:latest
         env:
           DOCKER_CLI_ACI: 1
           
