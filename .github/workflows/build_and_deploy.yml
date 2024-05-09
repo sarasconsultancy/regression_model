@@ -32,7 +32,11 @@ jobs:
       - name: Stop Container
         if: always()
         run: docker-compose -f "docker-compose.yaml" down
-
+  
+  Deploy:
+    name: Deployment
+    runs-on: [self-hosted]
+    steps:
       - name: Send a Slack Notification
         if: always()
         uses: slackapi/slack-github-action@v1.26.0
@@ -43,11 +47,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-  
-  Deploy:
-    name: Deployment
-    runs-on: [self-hosted]
-    steps:
+      
      
     
     
