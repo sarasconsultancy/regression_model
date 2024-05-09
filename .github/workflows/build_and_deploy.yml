@@ -22,14 +22,23 @@ jobs:
       - name : Trivy File Scan
         run : trivy fs . > trivyfile.txt
               
+      #- name: Docker Compose Build and Push
+      #  run: |
+      #    docker build -t training .
+      #    docker-compose -f docker-compose.yaml build
+      #    docker-compose -f docker-compose.yaml up -d
+      #    docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+      #    docker push xerxez786/training:latest
+      #  env:
+      #   DOCKER_CLI_ACI: 1
+
       - name: Docker Compose Build and Push
         run: |
-          docker build -t training .
-          docker-compose -f docker-compose.yaml build
-          docker-compose -f docker-compose.yaml up -d
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-          docker push xerxez786/training:latest
-        env:
-          DOCKER_CLI_ACI: 1
+            docker-compose build
+            docker-compose tag training xerxez786/training:latest
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            docker-compose push
+            
+            
           
           
