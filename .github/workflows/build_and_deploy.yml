@@ -17,19 +17,17 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      - name: npm install dependency
-        run: npm install
       - name: Trivy file scan
         run: trivy fs . > trivyfs.txt
       - name: Docker Build and push
         run: |
           docker-compose -f docker-compose.yaml
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-          docker push erxez786/regression_model-webapp:latest
+          docker push xerxez786/regression_model-webapp:latest
         env:
           DOCKER_CLI_ACI: 1
       - name: Image scan
-        run: trivy image erxez786/regression_model-webapp:latest > trivyimage.txt
+        run: trivy image xerxez786/regression_model-webapp:latest > trivyimage.txt
   deploy:
    needs: build-analyze-scan
    runs-on: [self-hosted]
@@ -40,10 +38,10 @@ jobs:
         run: trivy image xerxez786/regression_model-webapp:latest > trivyimagedeploy.txt
       - name: Deploy to container
         run: docker run -d --name game -p 8000:8000 xerxez786/regression_model-webapp:latest
-      - name: Update kubeconfig
-        run: aws eks --region ap-south-1 update-kubeconfig --name EKS_CLOUD
-      - name: Deploy to kubernetes
-        run: kubectl apply -f deployment-service.yml
+      # - name: Update kubeconfig
+      #   run: aws eks --region ap-south-1 update-kubeconfig --name EKS_CLOUD
+      # - name: Deploy to kubernetes
+      #   run: kubectl apply -f deployment-service.yml
       - name: Send a Slack Notification
         if: always()
         uses: act10ns/slack@v1
