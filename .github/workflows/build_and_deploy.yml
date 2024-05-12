@@ -21,8 +21,8 @@ jobs:
         run: trivy fs . > trivyfs.txt
       - name: Docker Build and push
         run: |
-          docker-compose -f docker-compose.yaml build
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+          docker-compose -f docker-compose.yaml build
           docker push xerxez786/regression_model-webapp:latest
         env:
           DOCKER_CLI_ACI: 1
