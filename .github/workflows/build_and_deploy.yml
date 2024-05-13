@@ -40,8 +40,8 @@ jobs:
     needs: build-analyze-scan
     runs-on: [self-hosted]
     steps:
-      - name: docker pull image
-        run: docker pull xerxez786/regression_model-webapp:latest
+      # - name: docker pull image
+      #   run: docker pull xerxez786/regression_model-webapp:latest
       - name: Image scan
         run: trivy image xerxez786/regression_model-webapp:latest > trivyimagedeploy.txt
       - name: Deploy to container
