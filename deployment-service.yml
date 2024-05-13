@@ -7,7 +7,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ttraining
+      app: training
   template:
     metadata:
       labels:
