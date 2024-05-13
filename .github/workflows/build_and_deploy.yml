@@ -42,6 +42,8 @@ jobs:
     steps:
       - name: docker pull image
         run: docker pull xerxez786/regression_model-webapp:latest
+      - name: Image scan
+        run: trivy image xerxez786/regression_model-webapp:latest > trivyimagedeploy.txt
 
       
 
