@@ -30,5 +30,14 @@ jobs:
         env:
           DOCKER_CLI_ACI: 1
 
+      - name: Image scan
+        run: trivy image xerxez786/regression_model-webapp:latest > trivyimage.txt
+
+      - name : Trivy CIS Compliance Issue
+        run: $ trivy image --compliance docker-cis xerxez786/regression_model-webapp:latest > trivy_image_compliance.txt
+      
+
+      
+
 
       
