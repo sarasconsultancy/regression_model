@@ -45,7 +45,7 @@ jobs:
       - name: Image scan
         run: trivy image xerxez786/regression_model-webapp:latest > trivyimagedeploy.txt
       - name: Deploy to container
-        run: docker run -d --name regression_model-webapp -p 8000:8000 xerxez786/regression_model-webapp:latest
+        run: docker run -d --name webapp -p 8000:8000 xerxez786/regression_model-webapp:latest
 
       - name: Update kubeconfig
         run: aws eks --region ap-south-1 update-kubeconfig --name EKS_CLOUD
