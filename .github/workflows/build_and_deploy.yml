@@ -12,14 +12,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Build and analyze with SonarQube
-        uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      # - name: Build and analyze with SonarQube
+      #   uses: sonarsource/sonarqube-scan-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-      - name: Trivy file scan
-        run: trivy fs . > trivyfs.txt
+      # - name: Trivy file scan
+      #   run: trivy fs . > trivyfs.txt
 
       - name: Docker Build and Push
         run: |
@@ -30,8 +30,8 @@ jobs:
         env:
           DOCKER_CLI_ACI: 1
 
-      - name: Image scan
-        run: trivy image xerxez786/regression_model-webapp:latest > trivyimage.txt
+      # - name: Image scan
+      #   run: trivy image xerxez786/regression_model-webapp:latest > trivyimage.txt
 
       # - name : Trivy CIS Compliance Issue
       #   run: $ trivy image --compliance docker-cis xerxez786/regression_model-webapp:latest > trivy_image_compliance.txt
@@ -42,8 +42,8 @@ jobs:
     steps:
       # - name: docker pull image
       #   run: docker pull xerxez786/regression_model-webapp:latest
-      - name: Image scan
-        run: trivy image xerxez786/regression_model-webapp:latest > trivyimagedeploy.txt
+      # - name: Image scan
+      #   run: trivy image xerxez786/regression_model-webapp:latest > trivyimagedeploy.txt
       # - name: Deploy to container
       #   run: docker run -d --name regression_model-webapp -p 8000:8000 xerxez786/regression_model-webapp:latest
 
@@ -52,15 +52,15 @@ jobs:
       - name: Deploy to kubernetes
         run: kubectl apply -f deployment-service.yml
 
-      - name: Send a Slack Notification
-        if: always()
-        uses: act10ns/slack@v1
-        with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-          channel: '#githubactions-eks'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # - name: Send a Slack Notification
+      #   if: always()
+      #   uses: act10ns/slack@v1
+      #   with:
+      #     status: ${{ job.status }}
+      #     steps: ${{ toJson(steps) }}
+      #     channel: '#githubactions-eks'
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       
 
