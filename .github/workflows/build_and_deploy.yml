@@ -19,6 +19,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       - name: Trivy file scan
         run: trivy fs . > trivyfs.txt
+      
       - name: Docker Build and push
         run: |
           docker-compose -f docker-compose.yaml build
@@ -29,6 +30,9 @@ jobs:
           DOCKER_CLI_ACI: 1
       - name: Image scan
         run: trivy image xerxez786/regression_model-webapp:latest > trivyimage.txt
+
+      - name : Trivy CIS Compliance Issue
+        run: $ trivy image --compliance docker-cis xerxez786/regression_model-webapp:latest > trivy_image_compliance.txt
   deploy:
    needs: build-analyze-scan
    runs-on: [self-hosted]
@@ -38,7 +42,7 @@ jobs:
       - name: Image scan
         run: trivy image xerxez786/regression_model-webapp:latest > trivyimagedeploy.txt
       - name: Deploy to container
-        run: docker run -d --name game -p 8000:8000 xerxez786/regression_model-webapp:latest
+        run: docker run -d --name regression_model-webapp -p 8000:8000 xerxez786/regression_model-webapp:latest
       # - name: Update kubeconfig
       #   run: aws eks --region ap-south-1 update-kubeconfig --name EKS_CLOUD
       # - name: Deploy to kubernetes
