@@ -21,5 +21,14 @@ jobs:
       - name: Trivy file scan
         run: trivy fs . > trivyfs.txt
 
-        
+      - name: Docker Build and Push
+        run: |
+          docker-compose -f docker-compose.yaml build
+          docker tag regression_model-webapp xerxez786/regression_model-webapp:latest
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+          docker push xerxez786/regression_model-webapp:latest
+        env:
+          DOCKER_CLI_ACI: 1
+
+
       
