@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: EKS_CLOUD
+  name: regression_model-webapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: EKS_CLOUD
+      app: regression_model-webapp
   template:
     metadata:
       labels:
-        app: EKS_CLOUD
+        app: regression_model-webapp
     spec:
       containers:
-      - name: EKS_CLOUD
+      - name: regression_model-webapp
         image: xerxez786/regression_model-webapp:latest
         ports:
         - containerPort: 8000   # Use port 3000
@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: EKS_CLOUD
+  name: regression_model-webapp-service
 spec:
   selector:
-    app: EKS_CLOUD
+    app: regression_model-webapp
   ports:
   - protocol: TCP
     port: 80                 # Expose port 80
