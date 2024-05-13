@@ -2,34 +2,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: regression_model-webapp
+  name: regression-model-webapp  # Updated deployment name
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: regression_model-webapp
+      app: regression-model-webapp  # Updated label name
   template:
     metadata:
       labels:
-        app: regression_model-webapp
+        app: regression-model-webapp  # Updated label name
     spec:
       containers:
-      - name: regression_model-webapp
+      - name: regression-model-webapp  # Updated container name
         image: xerxez786/regression_model-webapp:latest
         ports:
-        - containerPort: 8000   # Use port 3000
-
-
+        - containerPort: 8000   # Use port 8000
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: regression_model-webapp-service
+  name: regression-model-webapp-service
 spec:
   selector:
-    app: regression_model-webapp
+    app: regression-model-webapp  # Updated selector name
   ports:
   - protocol: TCP
-    port: 80               # Expose port 80
+    port: 80                 # Expose port 80
     targetPort: 8000
   type: LoadBalancer
