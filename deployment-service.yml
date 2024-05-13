@@ -30,6 +30,6 @@ spec:
     app: regression_model-webapp
   ports:
   - protocol: TCP
-    port: 8000                # Expose port 80
+    port: 80               # Expose port 80
     targetPort: 8000
   type: LoadBalancer
