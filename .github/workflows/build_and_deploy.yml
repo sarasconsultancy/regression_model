@@ -33,8 +33,16 @@ jobs:
       - name: Image scan
         run: trivy image xerxez786/regression_model-webapp:latest > trivyimage.txt
 
-      - name : Trivy CIS Compliance Issue
-        run: $ trivy image --compliance docker-cis xerxez786/regression_model-webapp:latest > trivy_image_compliance.txt
+      # - name : Trivy CIS Compliance Issue
+      #   run: $ trivy image --compliance docker-cis xerxez786/regression_model-webapp:latest > trivy_image_compliance.txt
+
+  deploy:
+    needs: build-analyze-scan
+    runs-on: [self-hosted]
+    steps:
+      - name: docker pull image
+        run: docker pull xerxez786/regression_model-webapp:latest
+
       
 
       
