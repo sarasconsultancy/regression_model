@@ -14,7 +14,7 @@ spec:
         app: training
     spec:
       containers:
-      - name: training
+      - name: EKS_CLOUD
         image: xerxez786/regression_model-webapp:latest
         ports:
         - containerPort: 8000   # Use port 3000
